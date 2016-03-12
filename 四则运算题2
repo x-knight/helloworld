@@ -1,0 +1,265 @@
+/*
+设计思路：
+1.判断是否有乘除法
+2.规定数值范围：通过random乘数值
+3.加减有无负数：两个数值随机产生符号
+4.除法有无余数：
+*/
+
+#include<iostream>
+#include<time.h>
+#include<string>
+# include <stdio.h>
+#include<stdlib.h>
+#include<iomanip>
+#include<cmath>  
+using namespace std;
+
+//1.乘除法
+int chengchu()
+{
+	char X;
+	cout << "请选择要产生几以内的四则运算：（10 or 100）";
+	int range;
+	cin >> range;
+
+	cout << "1.是否需要乘除法运算？（Y or N）\n";
+	cin >> X;
+
+	if (X == 'Y')
+	{
+
+		for (int count = 0; count < 5; count++)
+		{
+			int a = 0, b = 0;
+
+			a = rand() % range;
+			b = rand() % range ;
+
+			//随机产生四则运算符
+			int sign = 0;
+			sign = (rand() % 100) % 2;
+			string opera_sign[2] = { "*", "/" };
+
+			//当b=0且运算为除法时重新生成
+			while ((b == 0) & (sign == 1))
+			{
+				b = rand() % range;
+			}
+
+			switch (sign)
+			{
+			case 0:cout << a << opera_sign[sign] << b << "=" << endl; break;
+			case 1:cout << a << opera_sign[sign] << b << "=" << endl; break;
+			}
+		}
+	}
+	if (X == 'N')
+	{
+
+		for (int count = 0; count < 5; count++)
+		{
+			int a = 0, b = 0;
+
+			a = rand() % range;
+			b = rand() % range;
+
+			//随机产生四则运算符
+			int sign = 0;
+			sign = (rand() % 100) % 2;
+			string opera_sign[2] = { "+", "-" };
+
+			switch (sign)
+			{
+			case 0:cout << a << opera_sign[sign] << b << "=" << endl; break;
+			case 1:cout << a << opera_sign[sign] << b << "=" << endl; break;
+			}
+		}
+	}
+	return 0;
+}
+
+//2.包含真分数
+int fenshu()
+{
+	char Z;
+	cout << "2.是否包含真分数？（Y or N）\n";
+	cin >> Z;
+	if (Z == 'Y')
+	{
+		for (int count = 0; count < 5; count++)
+		{
+			int a1 = 0, b1 = 0, a2 = 0, b2 = 0;
+
+			a1 = rand() % 100;
+			b1 = rand() % 100;
+			a2 = rand() % 100;
+			b2 = rand() % 100;
+
+			//判断是否为真分数
+			while (a1>b1 || b1 == 0)
+			{
+				a1 = rand() % 100;
+				b1 = rand() % 100;
+			}
+
+			while (a2 > b2 || b2 == 0)
+			{
+				a2 = rand() % 100;
+				b2 = rand() % 100;
+			}
+
+			//随机产生四则运算符
+			int sign = 0;
+			sign = (rand() % 100) % 4;
+			string opera_sign[4] = { "+", "-", "*", "/" };
+
+			switch (sign)
+			{
+			case 0:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 1:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 2:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 3:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			}
+		}
+	}
+	if (Z == 'N')
+	{
+		for (int count = 0; count < 5; count++)
+		{
+			int a1 = 0, b1 = 0, a2 = 0, b2 = 0;
+
+			a1 = rand() % 100;
+			b1 = rand() % 100;
+			a2 = rand() % 100;
+			b2 = rand() % 100;
+
+			//分母不可为0
+			while (b1 == 0)
+			{
+				b1 = rand() % 100;
+			}
+			while (b2 == 0)
+			{
+				b2 = rand() % 100;
+			}
+
+			//随机产生四则运算符
+			int sign = 0;
+			sign = (rand() % 100) % 4;
+			string opera_sign[4] = { "+", "-", "*", "/" };
+
+			switch (sign)
+			{
+			case 0:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 1:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 2:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			case 3:cout << "(" << a1 << "/" << b1 << ")" << opera_sign[sign] << "(" << a2 << "/" << b2 << ")" << "=" << endl; break;
+			}
+		}
+	}
+	return 0;
+}
+
+//把数字转换成字符串型
+string int_string(int number)
+{
+	char str1[200];
+	itoa(number, str1, 10);
+	string str_ = str1;
+	return str_;
+}
+
+int kuohao()
+{
+	char K;
+	cout << "3.是否包含括号？（Y or N）\n";
+	cin >> K;
+	if (K == 'Y')
+	{
+		string stri[4];
+		for (int i = 0; i < 4; i++)
+		{
+			int a = 0, b = 0;
+			a = rand() % 100;
+			b = rand() % 100;
+
+			int sign = 0;
+			sign = (rand() % 100) % 4;
+			string opera_sign[4] = { "+", "-", "*", "/" };
+
+			//当b=0且运算为除法时重新生成
+			while ((b == 0) & (sign == 3))
+			{
+				b = rand() % 100;
+			}
+			string str,ch1, ch2;
+
+			ch1 = int_string(a);
+			ch2 = int_string(b);
+			//string stri[4];
+
+			switch (sign)
+			{
+			case 0:
+			{
+					  str = "(" + ch1 + opera_sign[sign] + ch2 + ")";
+			} break;
+
+			case 1:
+			{
+					  str = "(" + ch1 + opera_sign[sign] + ch2 + ")";
+			}break;
+
+			case 2:
+			{
+					  str = "(" + ch1 + opera_sign[sign] + ch2 + ")";
+			} break;
+
+			case 3:
+			{
+					  str = "(" + ch1 + opera_sign[sign] + ch2 + ")";
+			}break;
+			}
+			stri[i]= str;
+		}
+
+		string str5;
+	//	str5 = "((" + stri[0] + stri[1] + ")" +stri[2] + ")" + stri[3];
+		cout << "((" <<stri[0] <<"+"<<stri[1] << ")*"<<stri[2] <<")" <<"/"<< stri[3];
+		}
+		
+	else
+	{
+		cout << endl;
+	}
+	   
+
+}
+//主函数
+int main()
+{
+	//以现在的系统时间作为随机数的种子来产生随机数
+	srand(time(NULL));
+	cout << "请您选择四则运算题的条件：\n";
+	int result1 = chengchu();
+	int result2 = fenshu();
+	int result3 = kuohao();
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
